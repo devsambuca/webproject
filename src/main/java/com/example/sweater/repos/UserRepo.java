@@ -1,7 +1,8 @@
 package com.example.sweater.repos;
 
-/**
- * Created by z-FominykhVJ on 14.08.2018.
- */
-public interface UserRepo {
+import com.example.sweater.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepo extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 }
