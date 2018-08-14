@@ -1,5 +1,6 @@
 package com.example.sweater.config;
 
+import com.example.sweater.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,19 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-import javax.sql.DataSource;
-
 //класс который при старте приложения конфигурирует WebSecurity
 @Configuration
 @EnableWebSecurity
 public class WedSecurityConfig extends WebSecurityConfigurerAdapter{
+
     @Autowired
-    private DataSource dataSource;
+    private UserService userService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests() //авторизация
-                .antMatchers("/").permitAll() //
+                .antMatchers("/","/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -33,10 +33,7 @@ public class WedSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-        .dataSource(dataSource)
-        .passwordEncoder(NoOpPasswordEncoder.getInstance())
-        .usersByUsernameQuery("select username, password, active from usr where username=?") // System find user by name
-        .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.id = ur.user_id where u.username=?");
+        auth.userDetailsService(userService)
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 }
