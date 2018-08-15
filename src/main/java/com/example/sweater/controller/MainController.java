@@ -23,7 +23,7 @@ public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
-    @Value("${upload.path")
+    @Value("${upload.path}")
     private String uploadPath;
 
     @GetMapping("/")
@@ -32,7 +32,7 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "")String filter, Model model) {
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Message> messages = messageRepo.findAll();
 
         if (filter != null && !filter.isEmpty()) {
@@ -40,8 +40,10 @@ public class MainController {
         } else {
             messages = messageRepo.findAll();
         }
+
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
+
         return "main";
     }
 
@@ -57,14 +59,14 @@ public class MainController {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
-            if (!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
 
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
 
-            file.transferTo(new File(uploadPath +"/" + resultFilename));
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
 
             message.setFilename(resultFilename);
         }

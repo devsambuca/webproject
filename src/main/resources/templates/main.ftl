@@ -16,7 +16,7 @@
 </div>
 <div>Список сообщений</div>
 <form method="get" action="/main">
-    <input type="text" name="filter" value="$filter?ifExists">
+    <input type="text" name="filter" value="${filter?ifExists}">
     <button type="submit">Найти</button>
 </form>
     <#list messages as message>
