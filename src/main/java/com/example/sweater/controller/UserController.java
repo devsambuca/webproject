@@ -1,5 +1,6 @@
 package com.example.sweater.controller;
 
+import com.example.sweater.domain.Role;
 import com.example.sweater.domain.User;
 import com.example.sweater.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserController {
     public String userEditForm(@PathVariable User user, Model model) { // В PathVariable мы можем указать сразу User, тогда он будет
                                                                        // брать из бд без дополнитольного репозитория
         model.addAttribute("user", user);
-
+        model.addAttribute("roles", Role.values());
         return "userList";
     }
 }
