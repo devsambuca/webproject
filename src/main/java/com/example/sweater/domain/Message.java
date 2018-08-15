@@ -18,6 +18,9 @@ public class Message {
     @JoinColumn(name = "user_id")       // это нужно чтобы в базе данных это поле называлось user_id а не author_id
     private User author;
 
+    private String filename;
+
+
 
     public Message() {
     }
@@ -62,5 +65,12 @@ public class Message {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }
