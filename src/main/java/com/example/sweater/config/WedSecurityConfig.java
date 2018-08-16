@@ -22,7 +22,7 @@ public class WedSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests() //авторизация
-                .antMatchers("/","/registration","/static/**").permitAll()
+                .antMatchers("/","/registration","/static/**","/activate/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
