@@ -53,7 +53,7 @@ public class MainController {
     public String add(
             @AuthenticationPrincipal User user,
             @Valid Message message,
-            BindingResult bindingResult,
+            BindingResult bindingResult, //данный аргумент должен идти перед моделью
             Model model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {

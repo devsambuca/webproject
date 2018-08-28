@@ -17,7 +17,7 @@ CREATE TABLE user_role (
 CREATE TABLE usr (
   id              INT8         NOT NULL,
   activation_code VARCHAR(255),
-  active          BOOLEAN      NOT NULL,
+  active          BOOLEAN,
   email           VARCHAR(255),
   password        VARCHAR(255) NOT NULL,
   username        VARCHAR(255) NOT NULL,
