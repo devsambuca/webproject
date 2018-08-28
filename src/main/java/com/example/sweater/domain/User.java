@@ -19,7 +19,6 @@ public class User implements UserDetails {
     private String username;
     @NotBlank(message = "Password cannot be empty")
     private String password;
-    @Transient // данная анотация говорит Hybernate, что не нужно при работе с базой данных создавать поле
     private boolean active;
     @Email(message = "Email is not correct")
     @NotBlank(message = "Email cannot be empty")
